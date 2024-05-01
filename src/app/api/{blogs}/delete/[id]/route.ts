@@ -4,25 +4,25 @@ import { NextRequest, NextResponse } from "next/server";
 
 interface ApiResponse {
     data?: any;
+    message?: string;
     error?: string;
 }
-
-export async function GET(request: NextRequest) {
+export async function DELETE({id}: { id: string }, request: NextRequest) {
     try {
         await dbConnect();
 
-        const blogs = await Blog.find({ isDraft: false });
+        const blog = await Blog.findByIdAndDelete(id);
 
-        if (!blogs) {
-            const response: ApiResponse = { error: 'No published blog posts found' };
+        if (!blog) {
+            const response: ApiResponse = { error: 'Blog post not found' };
             return new NextResponse(JSON.stringify(response), { status: 404 });
         }
 
-        const response: ApiResponse = { data: blogs };
+        const response: ApiResponse = { message: 'Blog post deleted successfully', data: blog };
         return new NextResponse(JSON.stringify(response), { status: 200 });
     } catch (error) {
-        console.error('Error fetching blog posts:', error);
-        const response: ApiResponse = { error: 'Something went wrong while fetching blog posts' };
+        console.error('Error deleting blog post:', error);
+        const response: ApiResponse = { error: 'Something went wrong while deleting blog post' };
         return new NextResponse(JSON.stringify(response), { status: 500 });
     }
 }

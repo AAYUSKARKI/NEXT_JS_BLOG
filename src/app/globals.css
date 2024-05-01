@@ -2,32 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    @apply scroll-smooth bg-white font-sans text-red-600;
+  }
+  body {
+    @apply bg-white font-sans text-red-600;
+  }
+  h1 {
+    @apply text-4xl;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .btn {
+    @apply bg-red-600 px-4 py-2 font-bold text-white hover:bg-red-500;
+  }
+  .btn-outline {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
+  .input {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
+  .input-outline {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
+  .input-error {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
+  .input-success {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
+  .input-disabled {
+    @apply border-2 border-red-600 bg-white px-4 py-2 font-bold text-red-600 hover:bg-red-600 hover:text-white;
+  }
 }
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-nowrap {
+    white-space: nowrap;
+  }
+  .text-ellipsis {
+    text-overflow: ellipsis;
   }
 }
