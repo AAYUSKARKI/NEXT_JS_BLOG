@@ -12,31 +12,17 @@ function Createblog() {
     isDraft: false
   })
 
-  const [image, setImage] = useState<File | null>(null)
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBlog({ ...blog, [e.target.name]: e.target.value })
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setImage(file)
-    }
-  }
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formdata = new FormData();
-    formdata.append('title', blog.title);
-    formdata.append('description', blog.description);
-    formdata.append('category', blog.category);
-    formdata.append('isPublished', blog.isPublished.toString());
-    formdata.append('isDraft', blog.isDraft.toString());
-    formdata.append('image', image as File);
     try {
-      const response = await axios.post('/api/createblog', formdata)
+      const response = await axios.post('/api/createblog', blog)
       console.log(response.data)
     } catch (error) {
       console.error(error)
@@ -77,8 +63,10 @@ function Createblog() {
             name="category"
             value={blog.category}
             onChange={handleChange}
-          />
+            />
         </div>
+          
+        {/* </div>
         <div>
           <label htmlFor="image">Image:</label>
           <input
@@ -87,7 +75,7 @@ function Createblog() {
             name="image"
             onChange={handleImageChange}
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="isPublished">Is Published:</label>
           <input
