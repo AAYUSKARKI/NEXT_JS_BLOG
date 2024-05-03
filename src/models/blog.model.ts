@@ -25,7 +25,6 @@ const BlogSchema : Schema<Blog> = new Schema({
     },
     image: {
         type:String,
-        required: true
     },
     category: {
         type:String,
